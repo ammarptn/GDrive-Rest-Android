@@ -3,7 +3,6 @@ This is the library for integrate Google Drive Rest into your Android app
 
 #Usage
 
-add
 
 Add it in your root build.gradle at the end of repositories:
 
