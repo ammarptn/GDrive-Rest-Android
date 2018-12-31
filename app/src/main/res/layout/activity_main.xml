@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/g_drive_action"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/create_text_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="create text file" />
+
+        <Button
+            android:id="@+id/create_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="create folder" />
+
+
+        <Button
+            android:id="@+id/search_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search file" />
+
+        <Button
+            android:id="@+id/search_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search folder" />
+
+        <Button
+            android:id="@+id/upload_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="upload file" />
+
+        <Button
+            android:id="@+id/download_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="download file" />
+
+        <Button
+            android:id="@+id/delete_file_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="delete file" />
+
+    </LinearLayout>
+
+    <TextView
+        android:padding="8dp"
+        android:gravity="center"
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
