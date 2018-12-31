@@ -1,4 +1,4 @@
-# GDrive-Rest_-Android
+# GDrive-Rest-Android
 This is the library for integrate Google Drive Rest into your Android app
 
 ## Installation
@@ -17,6 +17,13 @@ Step 2. Add the dependency
 	dependencies {
 	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.0'
 	}
+	
+Step 3. Add OAuth 2.0 client IDs at [Google API console](https://console.cloud.google.com/apis)
+Step 4. Enable Google Drive API in [Google API console](https://console.cloud.google.com/apis)
+Step 5. Add "../auth/drive" in Scopes for Google APIs 
+
+
+
 
 ## Usage
 
