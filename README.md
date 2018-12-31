@@ -224,3 +224,20 @@ mDriveServiceHelper.deleteFolderFile("GoogleFileId").addOnSuccessListener(new On
 
 You can use other standard MimeType as well. 
 Ex. applicaiton/zip , text/plain
+
+### Chain action
+You can chain the command together. For Example, Search and delete first file that show in the result
+```java
+mDriveServiceHelper.searchFile("filename.txt","text/plain")
+                .continueWithTask(new Continuation<List<GoogleDriveFileHolder>, Task<Void>>() {
+                    @Override
+                    public Task<Void> then(@NonNull Task<List<GoogleDriveFileHolder>> task) throws Exception {
+                        return mDriveServiceHelper.deleteFolderFile(task.getResult().get(0).getId());
+                    }
+                });
+```
+		
+more info at [Task API](https://developers.google.com/android/guides/tasks)
+
+
+
