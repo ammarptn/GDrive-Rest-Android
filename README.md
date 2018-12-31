@@ -19,7 +19,9 @@ Step 2. Add the dependency
 	}
 	
 Step 3. Add OAuth 2.0 client IDs at [Google API console](https://console.cloud.google.com/apis)
+
 Step 4. Enable Google Drive API in [Google API console](https://console.cloud.google.com/apis)
+
 Step 5. Add "../auth/drive" in Scopes for Google APIs 
 
 
