@@ -15,7 +15,10 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
+            // Google Drive Rest library
 	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.0'
+            // For Google login
+            implementation 'com.google.android.gms:play-services-auth:16.0.1'
 	}
 	
 Step 3. Add OAuth 2.0 client IDs at [Google API console](https://console.cloud.google.com/apis)
