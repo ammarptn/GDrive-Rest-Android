@@ -84,7 +84,7 @@ mDriveServiceHelper.createTextFile("textFileName.txt", "some text", null)
                         });
 ```
 
-### create Folder If Not Exist 
+### Create Folder If Not Exist
 ```java
 mDriveServiceHelper.createFolderIfNotExist("folderName", null)
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
@@ -103,7 +103,7 @@ mDriveServiceHelper.createFolderIfNotExist("folderName", null)
                         });
 ```
 
-### create Text File If Not Exist 
+### Create Text File If Not Exist 
 ```java
 mDriveServiceHelper.createTextFileIfNotExist("textFileName.txt","content", null)
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
@@ -160,7 +160,42 @@ mDriveServiceHelper.searchFolder("folderName")
                             }
                         });
 ```
+### List File/Folder in Folder
+list File/Folder in Root of G-Drive, pass null as parameter
+```java
+mDriveServiceHelper.queryFiles(null)
+                        .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
+                            @Override
+                            public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
+                                Gson gson = new Gson();
+                                Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolders));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
+                            }
+                        });
+```
+
+list File/Folder in specific  folder, pass folder id as parameter
+```java
+mDriveServiceHelper.queryFiles("g-drive-folder-id-here")
+                        .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
+                            @Override
+                            public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
+                                Gson gson = new Gson();
+                                Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolders));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+```
 ### Upload File
 ```java
 mDriveServiceHelper.uploadFile(new java.io.File(getApplicationContext().getFilesDir(), "fileName.txt"), "text/plain", null)
