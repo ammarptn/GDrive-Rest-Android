@@ -482,11 +482,89 @@ public class DriveServiceHelper {
      * request Drive Full Scope in the <a href="https://play.google.com/apps/publish">Google
      * Developer's Console</a> and be submitted to Google for verification.</p>
      */
-    public Task<FileList> queryFiles() {
-        return Tasks.call(mExecutor, new Callable<FileList>() {
+    public Task<List<GoogleDriveFileHolder>> queryFiles() {
+        return Tasks.call(mExecutor, new Callable<List<GoogleDriveFileHolder>>() {
                     @Override
-                    public FileList call() throws Exception {
-                        return mDriveService.files().list().setSpaces("drive").execute();
+                    public List<GoogleDriveFileHolder> call() throws Exception {
+                        List<GoogleDriveFileHolder> googleDriveFileHolderList = new ArrayList<>();
+
+
+                        FileList result = mDriveService.files().list().setFields("files(id, name,size,createdTime,modifiedTime,starred)").setSpaces("drive").execute();
+
+                        for (int i = 0; i < result.getFiles().size(); i++) {
+
+                            GoogleDriveFileHolder googleDriveFileHolder = new GoogleDriveFileHolder();
+                            googleDriveFileHolder.setId(result.getFiles().get(i).getId());
+                            googleDriveFileHolder.setName(result.getFiles().get(i).getName());
+                            if (result.getFiles().get(i).getSize() != null) {
+                                googleDriveFileHolder.setSize(result.getFiles().get(i).getSize());
+                            }
+
+                            if (result.getFiles().get(i).getModifiedTime() != null) {
+                                googleDriveFileHolder.setModifiedTime(result.getFiles().get(i).getModifiedTime());
+                            }
+
+                            if (result.getFiles().get(i).getCreatedTime() != null) {
+                                googleDriveFileHolder.setCreatedTime(result.getFiles().get(i).getCreatedTime());
+                            }
+
+                            if (result.getFiles().get(i).getStarred() != null) {
+                                googleDriveFileHolder.setStarred(result.getFiles().get(i).getStarred());
+                            }
+
+                            googleDriveFileHolderList.add(googleDriveFileHolder);
+
+                        }
+
+
+                        return googleDriveFileHolderList;
+
+
+                    }
+                }
+        );
+    }
+
+    public Task<List<GoogleDriveFileHolder>> queryFiles(@Nullable final String folderId) {
+        return Tasks.call(mExecutor, new Callable<List<GoogleDriveFileHolder>>() {
+                    @Override
+                    public List<GoogleDriveFileHolder> call() throws Exception {
+                        List<GoogleDriveFileHolder> googleDriveFileHolderList = new ArrayList<>();
+                        String parent = "root";
+                        if (folderId != null) {
+                            parent = folderId;
+                        }
+
+                        FileList result = mDriveService.files().list().setQ("'" + parent + "' in parents").setFields("files(id, name,size,createdTime,modifiedTime,starred)").setSpaces("drive").execute();
+
+                        for (int i = 0; i < result.getFiles().size(); i++) {
+
+                            GoogleDriveFileHolder googleDriveFileHolder = new GoogleDriveFileHolder();
+                            googleDriveFileHolder.setId(result.getFiles().get(i).getId());
+                            googleDriveFileHolder.setName(result.getFiles().get(i).getName());
+                            if (result.getFiles().get(i).getSize() != null) {
+                                googleDriveFileHolder.setSize(result.getFiles().get(i).getSize());
+                            }
+
+                            if (result.getFiles().get(i).getModifiedTime() != null) {
+                                googleDriveFileHolder.setModifiedTime(result.getFiles().get(i).getModifiedTime());
+                            }
+
+                            if (result.getFiles().get(i).getCreatedTime() != null) {
+                                googleDriveFileHolder.setCreatedTime(result.getFiles().get(i).getCreatedTime());
+                            }
+
+                            if (result.getFiles().get(i).getStarred() != null) {
+                                googleDriveFileHolder.setStarred(result.getFiles().get(i).getStarred());
+                            }
+
+                            googleDriveFileHolderList.add(googleDriveFileHolder);
+
+                        }
+
+
+                        return googleDriveFileHolderList;
+
 
                     }
                 }

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button downloadFile;
     private Button deleteFileFolder;
     private TextView email;
+    private Button viewFileFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // you can provide  folder id in case you want to save this file inside some folder.
                 // if folder id is null, it will save file to the root
-                mDriveServiceHelper.createTextFile("textfilename.txt", "some text", null)
+                mDriveServiceHelper.createTextFile("textfilename.txt", "some text", "1KZmg7OpD-JVeyGh4NfWUH74srsskmlbY")
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                             @Override
                             public void onSuccess(GoogleDriveFileHolder googleDriveFileHolder) {
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // you can provide  folder id in case you want to save this file inside some folder.
                 // if folder id is null, it will save file to the root
-                mDriveServiceHelper.createFolder("testDummy", null)
+                mDriveServiceHelper.createFolder("testDummyss", "1KZmg7OpD-JVeyGh4NfWUH74srsskmlbY")
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                             @Override
                             public void onSuccess(GoogleDriveFileHolder googleDriveFileHolder) {
@@ -195,6 +196,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        viewFileFolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mDriveServiceHelper == null) {
+                    return;
+                }
+
+                mDriveServiceHelper.queryFiles()
+                        .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
+                            @Override
+                            public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
+                                Gson gson = new Gson();
+                                Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolders));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+
+
+            }
+        });
 
 
     }
@@ -279,5 +305,6 @@ public class MainActivity extends AppCompatActivity {
         uploadFile = findViewById(R.id.upload_file);
         downloadFile = findViewById(R.id.download_file);
         deleteFileFolder = findViewById(R.id.delete_file_folder);
+        viewFileFolder = findViewById(R.id.view_file_folder);
     }
 }

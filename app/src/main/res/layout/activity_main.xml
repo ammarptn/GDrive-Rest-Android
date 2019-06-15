@@ -61,6 +61,12 @@
             android:layout_height="wrap_content"
             android:text="delete file" />
 
+        <Button
+            android:id="@+id/view_file_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="view folder" />
+
     </LinearLayout>
 
     <TextView
