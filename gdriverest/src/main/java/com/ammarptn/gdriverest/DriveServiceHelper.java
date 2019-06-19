@@ -512,6 +512,9 @@ public class DriveServiceHelper {
                                 googleDriveFileHolder.setStarred(result.getFiles().get(i).getStarred());
                             }
 
+                            if (result.getFiles().get(i).getMimeType() != null) {
+                                googleDriveFileHolder.setMimeType(result.getFiles().get(i).getMimeType());
+                            }
                             googleDriveFileHolderList.add(googleDriveFileHolder);
 
                         }
@@ -556,6 +559,9 @@ public class DriveServiceHelper {
 
                             if (result.getFiles().get(i).getStarred() != null) {
                                 googleDriveFileHolder.setStarred(result.getFiles().get(i).getStarred());
+                            }
+                            if (result.getFiles().get(i).getMimeType() != null) {
+                                googleDriveFileHolder.setMimeType(result.getFiles().get(i).getMimeType());
                             }
 
                             googleDriveFileHolderList.add(googleDriveFileHolder);

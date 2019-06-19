@@ -16,7 +16,7 @@ Step 2. Add the dependency
 
 	dependencies {
             // Google Drive Rest library
-	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.2'
+	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.3'
             // For Google login
             implementation 'com.google.android.gms:play-services-auth:16.0.1'
 	}

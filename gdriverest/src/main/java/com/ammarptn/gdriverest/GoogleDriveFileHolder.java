@@ -10,6 +10,7 @@ public class GoogleDriveFileHolder {
     private long size;
     private DateTime createdTime;
     private Boolean starred;
+    private String mimeType;
 
 
     public DateTime getCreatedTime() {
@@ -58,5 +59,13 @@ public class GoogleDriveFileHolder {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 }

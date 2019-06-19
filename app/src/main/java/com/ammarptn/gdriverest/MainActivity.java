@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -271,6 +272,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, resultData);
+    }
+
+    public void test() {
+        System.out.println("test");
     }
 
     private void handleSignInResult(Intent result) {
