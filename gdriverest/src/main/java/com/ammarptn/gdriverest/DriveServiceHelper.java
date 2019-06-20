@@ -489,7 +489,7 @@ public class DriveServiceHelper {
                         List<GoogleDriveFileHolder> googleDriveFileHolderList = new ArrayList<>();
 
 
-                        FileList result = mDriveService.files().list().setFields("files(id, name,size,createdTime,modifiedTime,starred)").setSpaces("drive").execute();
+                        FileList result = mDriveService.files().list().setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("drive").execute();
 
                         for (int i = 0; i < result.getFiles().size(); i++) {
 
@@ -538,7 +538,7 @@ public class DriveServiceHelper {
                             parent = folderId;
                         }
 
-                        FileList result = mDriveService.files().list().setQ("'" + parent + "' in parents").setFields("files(id, name,size,createdTime,modifiedTime,starred)").setSpaces("drive").execute();
+                        FileList result = mDriveService.files().list().setQ("'" + parent + "' in parents").setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("drive").execute();
 
                         for (int i = 0; i < result.getFiles().size(); i++) {
 
