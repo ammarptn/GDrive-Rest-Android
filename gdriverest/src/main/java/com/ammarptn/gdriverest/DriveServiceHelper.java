@@ -82,6 +82,27 @@ public class DriveServiceHelper {
     public static String TYPE_VIDEO = "application/vnd.google-apps.video";
     public static String TYPE_3_RD_PARTY_SHORTCUT = "application/vnd.google-apps.drive-sdk";
 
+
+    public static String EXPORT_TYPE_HTML = "text/html";
+    public static String EXPORT_TYPE_HTML_ZIPPED = "application/zip";
+    public static String EXPORT_TYPE_PLAIN_TEXT = "text/plain";
+    public static String EXPORT_TYPE_RICH_TEXT = "application/rtf";
+    public static String EXPORT_TYPE_OPEN_OFFICE_DOC = "application/vnd.oasis.opendocument.text";
+    public static String EXPORT_TYPE_PDF = "application/pdf";
+    public static String EXPORT_TYPE_MS_WORD_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    public static String EXPORT_TYPE_EPUB = "application/epub+zip";
+    public static String EXPORT_TYPE_MS_EXCEL = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    public static String EXPORT_TYPE_OPEN_OFFICE_SHEET = "application/x-vnd.oasis.opendocument.spreadsheet";
+    public static String EXPORT_TYPE_CSV = "text/csv";
+    public static String EXPORT_TYPE_TSV = "text/tab-separated-values";
+    public static String EXPORT_TYPE_JPEG = "application/zip";
+    public static String EXPORT_TYPE_PNG = "image/png";
+    public static String EXPORT_TYPE_SVG = "image/svg+xml";
+    public static String EXPORT_TYPE_MS_POWER_POINT = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    public static String EXPORT_TYPE_OPEN_OFFICE_PRESENTATION = "application/vnd.oasis.opendocument.presentation";
+    public static String EXPORT_TYPE_JSON = "application/vnd.google-apps.script+json";
+
+
     public DriveServiceHelper(Drive driveService) {
 
         mDriveService = driveService;
@@ -102,6 +123,21 @@ public class DriveServiceHelper {
         return googleDriveService;
     }
 
+
+    public static Drive getAppDataGoogleDriveService(Context context, GoogleSignInAccount account, String appName) {
+        GoogleAccountCredential credential =
+                GoogleAccountCredential.usingOAuth2(
+                        context, Collections.singleton(DriveScopes.DRIVE_APPDATA));
+        credential.setSelectedAccount(account.getAccount());
+        com.google.api.services.drive.Drive googleDriveService =
+                new com.google.api.services.drive.Drive.Builder(
+                        AndroidHttp.newCompatibleTransport(),
+                        new GsonFactory(),
+                        credential)
+                        .setApplicationName(appName)
+                        .build();
+        return googleDriveService;
+    }
     /**
      * Creates a text file in the user's My Drive folder and returns its file ID.
      */
@@ -453,6 +489,18 @@ public class DriveServiceHelper {
         });
     }
 
+    public Task<Void> exportFile(final java.io.File fileSaveLocation, final String fileId, final String mimeType) {
+        return Tasks.call(mExecutor, new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                // Retrieve the metadata as a File object.
+                OutputStream outputStream = new FileOutputStream(fileSaveLocation);
+                mDriveService.files().export(fileId, mimeType).executeMediaAndDownloadTo(outputStream);
+                return null;
+            }
+        });
+    }
+
     /**
      * Updates the file identified by {@code fileId} with the given {@code name} and {@code
      * content}.
@@ -576,6 +624,8 @@ public class DriveServiceHelper {
                 }
         );
     }
+
+
 
     /**
      * Returns an {@link Intent} for opening the Storage Access Framework file picker.
