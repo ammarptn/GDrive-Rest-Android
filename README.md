@@ -42,7 +42,11 @@ Step 5. Add "../auth/drive" in Scopes for Google APIs
  	GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
 	...
 	
+	//if you want to use your common space of G drive
 	mDriveServiceHelper = new DriveServiceHelper(getGoogleDriveService(getApplicationContext(), account, "appName"));
+	
+	//if you want to use your appData space of G drive
+	mDriveServiceHelper = new DriveServiceHelper(getAppDataGoogleDriveService(getApplicationContext(), account, "appName"));
         
 ```
 The rest of authentication's example locate at 
