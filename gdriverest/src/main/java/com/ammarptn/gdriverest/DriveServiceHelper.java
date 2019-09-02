@@ -138,6 +138,7 @@ public class DriveServiceHelper {
                         .build();
         return googleDriveService;
     }
+
     /**
      * Creates a text file in the user's My Drive folder and returns its file ID.
      */
@@ -489,6 +490,16 @@ public class DriveServiceHelper {
         });
     }
 
+    public Task<InputStream> downloadFile(final String fileId) {
+        return Tasks.call(mExecutor, new Callable<InputStream>() {
+            @Override
+            public InputStream call() throws Exception {
+                // Retrieve the metadata as a File object.
+                return mDriveService.files().get(fileId).executeMediaAsInputStream();
+            }
+        });
+    }
+
     public Task<Void> exportFile(final java.io.File fileSaveLocation, final String fileId, final String mimeType) {
         return Tasks.call(mExecutor, new Callable<Void>() {
             @Override
@@ -624,7 +635,6 @@ public class DriveServiceHelper {
                 }
         );
     }
-
 
 
     /**
