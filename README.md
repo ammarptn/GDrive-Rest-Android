@@ -25,7 +25,10 @@ Step 3. Add OAuth 2.0 client IDs at [Google API console](https://console.cloud.g
 
 Step 4. Enable Google Drive API in [Google API console](https://console.cloud.google.com/apis)
 
-Step 5. Add "../auth/drive" in Scopes for Google APIs  
+Step 5. Add "../auth/drive" in Scopes for Google APIs 
+
+Optional 
+Step 6. Add "../auth/drive.appdata" in Scopes if you want to access application data folder
 
 
 
