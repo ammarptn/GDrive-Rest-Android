@@ -61,7 +61,7 @@ import javax.annotation.Nullable;
  * A utility for performing read/write operations on Drive files via the REST API and opening a
  * file picker UI via Storage Access Framework.
  */
-public class DriveServiceHelper {
+public class AppDataDriveServiceHelper {
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
     private final Drive mDriveService;
 
@@ -103,18 +103,18 @@ public class DriveServiceHelper {
     public static String EXPORT_TYPE_JSON = "application/vnd.google-apps.script+json";
 
 
-    public DriveServiceHelper(Drive driveService) {
+    public AppDataDriveServiceHelper(Drive driveService) {
 
         mDriveService = driveService;
     }
 
-    public static Drive getGoogleDriveService(Context context, GoogleSignInAccount account, String appName) {
+    public static Drive getGoogleAppDataDriveService(Context context, GoogleSignInAccount account, String appName) {
         GoogleAccountCredential credential =
                 GoogleAccountCredential.usingOAuth2(
-                        context, Collections.singleton(DriveScopes.DRIVE_FILE));
+                        context, Collections.singleton(DriveScopes.DRIVE_APPDATA));
         credential.setSelectedAccount(account.getAccount());
-        com.google.api.services.drive.Drive googleDriveService =
-                new com.google.api.services.drive.Drive.Builder(
+        Drive googleDriveService =
+                new Drive.Builder(
                         AndroidHttp.newCompatibleTransport(),
                         new GsonFactory(),
                         credential)
@@ -122,8 +122,6 @@ public class DriveServiceHelper {
                         .build();
         return googleDriveService;
     }
-
-
 
 
     /**
@@ -215,7 +213,7 @@ public class DriveServiceHelper {
 
                 FileList result = mDriveService.files().list()
                         .setQ("mimeType = 'text/plain' and name = '" + fileName + "' ")
-                        .setSpaces("drive")
+                        .setSpaces("appDataFolder")
                         .execute();
 
                 if (result.getFiles().size() > 0) {
@@ -285,7 +283,7 @@ public class DriveServiceHelper {
                 GoogleDriveFileHolder googleDriveFileHolder = new GoogleDriveFileHolder();
                 FileList result = mDriveService.files().list()
                         .setQ("mimeType = '" + DriveFolder.MIME_TYPE + "' and name = '" + folderName + "' ")
-                        .setSpaces("drive")
+                        .setSpaces("appDataFolder")
                         .execute();
 
                 if (result.getFiles().size() > 0) {
@@ -418,7 +416,7 @@ public class DriveServiceHelper {
                 // Retrive the metadata as a File object.
                 FileList result = mDriveService.files().list()
                         .setQ("mimeType = '" + DriveFolder.MIME_TYPE + "' and name = '" + folderName + "' ")
-                        .setSpaces("drive")
+                        .setSpaces("appDataFolder")
                         .execute();
 
                 for (int i = 0; i < result.getFiles().size(); i++) {
@@ -445,7 +443,7 @@ public class DriveServiceHelper {
                 // Retrive the metadata as a File object.
                 FileList result = mDriveService.files().list()
                         .setQ("name = '" + fileName + "' and mimeType ='" + mimeType + "'")
-                        .setSpaces("drive")
+                        .setSpaces("appDataFolder")
                         .setFields("files(id, name,size,createdTime,modifiedTime,starred)")
                         .execute();
 
@@ -535,7 +533,7 @@ public class DriveServiceHelper {
                         List<GoogleDriveFileHolder> googleDriveFileHolderList = new ArrayList<>();
 
 
-                        FileList result = mDriveService.files().list().setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("drive").execute();
+                        FileList result = mDriveService.files().list().setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("appDataFolder").execute();
 
                         for (int i = 0; i < result.getFiles().size(); i++) {
 
@@ -584,7 +582,7 @@ public class DriveServiceHelper {
                             parent = folderId;
                         }
 
-                        FileList result = mDriveService.files().list().setQ("'" + parent + "' in parents").setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("drive").execute();
+                        FileList result = mDriveService.files().list().setQ("'" + parent + "' in parents").setFields("files(id, name,size,createdTime,modifiedTime,starred,mimeType)").setSpaces("appDataFolder").execute();
 
                         for (int i = 0; i < result.getFiles().size(); i++) {
 

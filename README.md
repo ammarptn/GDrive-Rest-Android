@@ -16,7 +16,7 @@ Step 2. Add the dependency
 
 	dependencies {
             // Google Drive Rest library
-	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.4.1'
+	        implementation 'com.github.ammarptn:GDrive-Rest-Android:1.4.2'
             // For Google login
             implementation 'com.google.android.gms:play-services-auth:16.0.1'
 	}
@@ -43,10 +43,11 @@ Step 5. Add "../auth/drive" in Scopes for Google APIs
 	...
 	
 	//if you want to use your common space of G drive
-	mDriveServiceHelper = new DriveServiceHelper(getGoogleDriveService(getApplicationContext(), account, "appName"));
+	mDriveServiceHelper = new DriveServiceHelper(getGoogleDriveService(getApplicationContext(), account, "your_app_name_here"));
 	
-	//if you want to use your appData space of G drive
-	mDriveServiceHelper = new DriveServiceHelper(getAppDataGoogleDriveService(getApplicationContext(), account, "appName"));
+	
+	//if you want to use your appData space of G drive 
+	mDriveServiceHelper = new AppDataDriveServiceHelper(getGoogleAppDataDriveService(getApplicationContext(), account, "your_app_name_here"));
         
 ```
 The rest of authentication's example locate at 
