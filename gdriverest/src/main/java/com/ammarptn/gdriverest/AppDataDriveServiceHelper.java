@@ -58,9 +58,13 @@ import javax.annotation.Nullable;
 
 
 /**
- * A utility for performing read/write operations on Drive files via the REST API and opening a
- * file picker UI via Storage Access Framework.
+ * @deprecated
+ *
+ * Support for storing and syncing in the app data folder will likely be removed from Drive in the future.
+ * Clients requiring app data storage are strongly encouraged to migrate to a non-Drive solution such as Cloud Firestore.
+ * https://developers.google.com/drive/android/deprecation
  */
+@Deprecated
 public class AppDataDriveServiceHelper {
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
     private final Drive mDriveService;

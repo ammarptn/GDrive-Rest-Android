@@ -3,14 +3,15 @@ package com.ammarptn.gdriverest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ammarptn.debug.gdrive.lib.GDriveDebugViewActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // you can provide  folder id in case you want to save this file inside some folder.
                 // if folder id is null, it will save file to the root
-                mDriveServiceHelper.createTextFile("textfilename.txt", "some text", "1KZmg7OpD-JVeyGh4NfWUH74srsskmlbY")
+                mDriveServiceHelper.createTextFile("textfilename.txt", "some text", null)
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                             @Override
                             public void onSuccess(GoogleDriveFileHolder googleDriveFileHolder) {
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // you can provide  folder id in case you want to save this file inside some folder.
                 // if folder id is null, it will save file to the root
-                mDriveServiceHelper.createFolder("testDummyss", "1KZmg7OpD-JVeyGh4NfWUH74srsskmlbY")
+                mDriveServiceHelper.createFolder("testDummyss", null)
                         .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                             @Override
                             public void onSuccess(GoogleDriveFileHolder googleDriveFileHolder) {
@@ -199,24 +200,27 @@ public class MainActivity extends AppCompatActivity {
         viewFileFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mDriveServiceHelper == null) {
-                    return;
-                }
+//                if (mDriveServiceHelper == null) {
+//                    return;
+//                }
+//
+//                mDriveServiceHelper.queryFiles()
+//                        .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
+//                            @Override
+//                            public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
+//                                Gson gson = new Gson();
+//                                Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolders));
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//
+//                            }
+//                        });
+                Intent openActivity = new Intent(getApplicationContext(), GDriveDebugViewActivity.class);
+                startActivity(openActivity);
 
-                mDriveServiceHelper.queryFiles()
-                        .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
-                            @Override
-                            public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
-                                Gson gson = new Gson();
-                                Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolders));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                            }
-                        });
 
 
             }
