@@ -48,9 +48,6 @@ Step 6. Add "../auth/drive.appdata" in Scopes if you want to access application 
 	//if you want to use your common space of G drive
 	mDriveServiceHelper = new DriveServiceHelper(getGoogleDriveService(getApplicationContext(), account, "your_app_name_here"));
 	
-	
-	//if you want to use your appData space of G drive 
-	mDriveServiceHelper = new AppDataDriveServiceHelper(getGoogleAppDataDriveService(getApplicationContext(), account, "your_app_name_here"));
         
 ```
 The rest of authentication's example locate at 
